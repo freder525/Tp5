@@ -1,0 +1,113 @@
+body,ul, ol, li, p, h1, h2{
+	margin:0;
+	padding:0;}
+
+h2{
+	background: none;
+	color:RGB(34,64,53);
+	padding: 5px;
+	text-align:center;
+	font-size:35px;
+}
+	
+body{
+	background-color:#000033;
+	margin-top:10px;
+
+}
+
+
+/*------------DEBUT REGLES FORMULAIRE-------------*/
+
+form{
+
+	width:422px;
+	margin:0 auto;
+	padding:30px;
+	}
+
+form p {
+	margin-top:5px;
+}	
+
+.grandeur{
+	width:200px;
+}	
+
+form p label{
+	width:160px;
+	display: inline-block;
+}
+ 
+input[type="submit"]{
+
+	color:white;
+	display:block;
+	width:175px;
+	margin:10px auto;
+	padding:15px;
+	background: RGB(34,64,53);
+	border-radius: 10px;
+	font-family:"Times New Roman", Times, serif;
+	font-size:35px;
+	
+}
+input[type="submit"]:hover{
+	background:RGB(120,190,40);
+}
+
+#contenu{
+	width:995px;
+	background-color:#F6F4EA;
+	margin-right:0px;
+}
+
+
+#menu ul{
+	list-style-type:none;
+	margin:0;
+	padding:0;
+	width:960px;
+	height:30px;
+	background-color:#07F;
+	}
+#menu ul li a:visited
+{
+	color:white;
+}
+
+#menu ul li a:hover
+{
+	background-color: RGB(120,190,40);
+}
+
+#menu ul a
+{
+	padding-top:10px;
+	background-color: RGB(34,64,53);
+}
+#menu 
+{
+margin-top:25px;
+	height:42px;
+}
+
+#menu ul li
+{
+float:left;
+}
+#menu ul 
+{
+width:1000px;
+background-color: transparent;
+}
+
+#menu ul li a{
+	display:block;
+	width:164px;
+	color:white;
+	height:30px;
+	text-decoration:none;
+	text-align:center;
+	 border:solid 1px rgba(120,190,40,0.3);
+}
