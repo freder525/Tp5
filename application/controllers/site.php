@@ -39,14 +39,17 @@ class Site extends CI_Controller {
 
 		$this->load->view('vinscription');
 	}
-<<<<<<< HEAD
+
 	public function recherche()
 	{
 		$this->load->view('vrecherche');
 	}
-		public function horaire()
-=======
-	function pseudoValide($pseudo)
+	public function horaire()
+	{
+	$this->load->view('vhoraire');
+	}
+
+	public function pseudoValide($pseudo)
 	{
 		//Vérifie en asynchrone si le pseudo est pris
 		if($this->mindex->pseudoEstPris($pseudo))
@@ -59,11 +62,7 @@ class Site extends CI_Controller {
 			return true;
 		}
 	}
-	public function horaire()
->>>>>>> origin/master
-	{
-		$this->load->view('vhoraire');
-	}
+
 	public function activites()
 	{
 		$this->load->view('vactivites');

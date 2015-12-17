@@ -3,7 +3,7 @@
 		?>
 
 		<div id="contenu">
-	
+		<h2>Inscription</h2>
 		<?php echo form_open('Site/inscription', 'id="form1"');?>
         	<ol>
             	<li><label for="name">Nom : </label>
