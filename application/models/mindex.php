@@ -56,8 +56,16 @@ class Mindex extends CI_Model {
 		$this->db->from('lecteur');
 		$this->db->where(array('pseudo' => $login, 'motdepasse'=>$pass));
 		$query = $this->db->get(); 
-		return $query->result_array();
+		return $query->row_array(0);
 		
+	}
+	public function infosprofilutilisateur($idUsager)
+	{
+		$this->db->select('nom, adresse, ville, cp, telephone, courriel, pseudo, commentaire');
+		$this->db->from('lecteur');
+		$this->db->where(array('id' => $idUsager));
+		$requeteProfil = $this->db->get();
+		return $requeteProfil->row_array(0);
 	}
 	public function livresempruntes($id){
 		$this->db->select('titre, auteur, id_emprunt');
@@ -101,6 +109,10 @@ class Mindex extends CI_Model {
 		{
 			return false;
 		}
+	}
+	public function estConnecte()
+	{
+		return isset($_SESSION['user']) ? true : false;
 	}
 }
 ?>

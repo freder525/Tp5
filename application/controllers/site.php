@@ -75,12 +75,12 @@ class Site extends CI_Controller {
 	}
 	public function mondossier()
 	{
-		if(isset($_SESSION['user']))
+		if($this->mindex->estConnecte())
 		{
-			$resultat1=$this->mindex->livresempruntes($_SESSION['user'][0]['id']);
-			$resultat2=$this->mindex->livresreserves($_SESSION['user'][0]['id']);
+			$resultat1=$this->mindex->livresempruntes($_SESSION['user']['id']);
+			$resultat2=$this->mindex->livresreserves($_SESSION['user']['id']);
 			$param=array(
-				'usertype'=>$_SESSION['user'][0]['type'],
+				'usertype'=>$_SESSION['user']['type'],
 				'empruntes'=>$resultat1,
 				'reserves'=>$resultat2,
 				);
@@ -91,6 +91,35 @@ class Site extends CI_Controller {
 			$this->login();
 		}
 		
+	}
+	public function profil()
+	{
+		if($this->mindex->estConnecte())
+		{
+			if ($this->form_validation->run())
+			{
+
+			}
+			else
+			{
+				//Récupérer les informations de l'usager
+				$donneesUsager = $this->mindex->infosprofilutilisateur($_SESSION['user']['id']);
+				$param = array('nom' => $donneesUsager['nom'],
+							   'adresse' => $donneesUsager['adresse'],
+							   'ville' => $donneesUsager['ville'],
+							   'cp' => $donneesUsager['cp'],
+							   'telephone' => $donneesUsager['telephone'],
+							   'courriel' => $donneesUsager['courriel'],
+							   'pseudo' => $donneesUsager['pseudo'],
+							   'commentaire' => $donneesUsager['commentaire']);
+			}
+
+			$this->load->view('vprofil', $param);
+		}
+		else
+		{
+			$this->login();
+		}
 	}
 	public function pageutilisateur(){
 		$this->form_validation->set_rules('login','Nom d\'utilisateur','trim|required');
@@ -110,10 +139,10 @@ class Site extends CI_Controller {
 				//Ajouter l'usager à la session
 				$this->session->set_userdata('user', $rs);
 
-				$resultat1=$this->mindex->livresempruntes($rs[0]['id']);
-				$resultat2=$this->mindex->livresreserves($rs[0]['id']);
+				$resultat1=$this->mindex->livresempruntes($rs['id']);
+				$resultat2=$this->mindex->livresreserves($rs['id']);
 				$param=array(
-					'usertype'=>$rs[0]['type'],
+					'usertype'=>$rs['type'],
 					'empruntes'=>$resultat1,
 					'reserves'=>$resultat2,
 					);

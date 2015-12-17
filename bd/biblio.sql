@@ -72,15 +72,15 @@ CREATE TABLE  `lecteur` (
 --
 
 INSERT INTO `lecteur` (`id`, `nom`, `adresse`, `ville`, `cp`, `telephone`, `courriel`, `pseudo`, `motdepasse`, `commentaire`, `type`) VALUES
-(1, 'Gervais Alain', '123 rue des sapins', 'QuÃ©bec', 'G2B 3S5', '418 234-5678', 'agervais@abc.com', 'agervais', '12345', 'Rien de particulier.', 'u'),
-(2, 'Landry Bernard', '23 rue des Ã©pinettes', 'QuÃ©bec', 'G3R 2S5', '418 456-263', 'blandry@cms.ca', 'blandry', '12345', 'Rien de particulier.', 'u'),
-(3, 'Dumont Mario', '275 rue des ivettes', 'QuÃ©bec', 'G5R 2R5', '418 345-0987', 'dmario@libero.ca', 'dmario', '12345', 'Rien de particulier.', 'u'),
-(4, 'Richard Daniel', '123 rue des Ã‰pinettes', 'QuÃ©bec', 'G1V 2S9', '418 678-0978', 'drichard@abcde.ca', 'drichard', '12345', 'Rien de particulier.', 'u'),
-(5, 'Gagnon michel', '25 rue des Ã©rables', 'QuÃ©bec', 'G2B 4S6', '418 345-8904', 'gmichel@rts.com', 'gmichel', '12345', 'Rien de particulier.', 'u'),
+(1, 'Gervais Alain', '123 rue des sapins', 'Québec', 'G2B 3S5', '418 234-5678', 'agervais@abc.com', 'agervais', '12345', 'Rien de particulier.', 'u'),
+(2, 'Landry Bernard', '23 rue des épinettes', 'Québec', 'G3R 2S5', '418 456-263', 'blandry@cms.ca', 'blandry', '12345', 'Rien de particulier.', 'u'),
+(3, 'Dumont Mario', '275 rue des ivettes', 'Québec', 'G5R 2R5', '418 345-0987', 'dmario@libero.ca', 'dmario', '12345', 'Rien de particulier.', 'u'),
+(4, 'Richard Daniel', '123 rue des épinettes', 'Québec', 'G1V 2S9', '418 678-0978', 'drichard@abcde.ca', 'drichard', '12345', 'Rien de particulier.', 'u'),
+(5, 'Gagnon michel', '25 rue des érables', 'Québec', 'G2B 4S6', '418 345-8904', 'gmichel@rts.com', 'gmichel', '12345', 'Rien de particulier.', 'u'),
 (6, 'Menard Sandrine', '234 rue des hirondelles', 'Québec', 'G3D 2F5', '418 123-0987', 'msandrine@csf.com', 'msandrine', '12345', 'Rien de particulier.', 'u'),
 (7, 'Nick', '12324', '12312', 'G1Mjkjk', '4128----', 'nick@toto.com', 'nick', '12345', 'Rien de particulier.', 'u'),
-(8, 'Brown Sami', '125 rue de la Loire', 'QuÃ©bec', 'G1S 2B5', '418 234-5678', 'sbrown@sifo.com', 'sbrown', '12345', 'Rien de particulier.', 'a'),
-(9, 'Chicotte Samuel', '234 rue des peupliers', 'QuÃ©bec', 'G3S 2G5', '418 456-0987', 'schicotte@abcdef.com', 'schicotte', '12345', 'Rien de particulier.', 'a');
+(8, 'Brown Sami', '125 rue de la Loire', 'Québec', 'G1S 2B5', '418 234-5678', 'sbrown@sifo.com', 'sbrown', '12345', 'Rien de particulier.', 'a'),
+(9, 'Chicotte Samuel', '234 rue des peupliers', 'Québec', 'G3S 2G5', '418 456-0987', 'schicotte@abcdef.com', 'schicotte', '12345', 'Rien de particulier.', 'a');
 
 -- --------------------------------------------------------
 
@@ -106,10 +106,10 @@ CREATE TABLE `livre` (
 
 INSERT INTO `livre` (`id`, `titre`, `auteur`, `annee`, `genre`, `etat`, `id_emprunt`, `id_reserve`) VALUES
 (' 006.76 P5759h', 'PHP et MySQL : maîtrisez le développement d''un site Web dynamique et interactif', 'Heurtel, Olivier', 2014, 'Sciences, informatique', 'Emprunté', '1', '2'),
-('005.133 P5759L', 'PHP 5 : industrialisation : outils & bonnes pratiques', 'Lï¿½pine, Jean-Franï¿½ois', 2012, 'Sciences, informatique', 'Emprunté', '9', '3'),
+('005.133 P5759L', 'PHP 5 : industrialisation : outils & bonnes pratiques', 'L\'épine, Jean-François', 2012, 'Sciences, informatique', 'Emprunté', '9', '3'),
 ('006.76 P5758h', 'PHP 5.5 : développez un site Web dynamique et interactif', 'Heurtel, Olivier', 2013, 'Sciences, informatique', 'Disponible', '', ''),
 ('123.456 h57', 'Les 7 mercenaires', 'Gervais Alain', 1988, 'Roman', 'Emprunté', '5', ''),
-('234.345 T35', 'Les bronzÃ©s', 'Tremblay Gerald', 2002, 'Roman', 'Disponible', '', ''),
+('234.345 T35', 'Les bronzés', 'Tremblay Gerald', 2002, 'Roman', 'Disponible', '', ''),
 ('641.5952 T6562s', 'Sushis : makis, yakitoris, onigiris-- ', 'Tombini, Marie-Laure', 2013, 'Cuisine', 'Emprunté', '6', '8'),
 ('641.82 T788s', 'Sushi végétarien ', 'Treloar, Brigid', 2014, 'Cuisine', 'Emprunté', '4', '5'),
 ('841.8 B338f', 'Les fleurs du mal', 'Baudelaire, Charles', 2006, 'Poésie', 'Emprunté', '6', '7'),

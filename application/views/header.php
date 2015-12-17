@@ -30,7 +30,8 @@
 				if (isset ( $_SESSION ['user'] ))
 				{
 					echo '<div class="lienHautPageConn">';
-					echo $_SESSION['user'][0]['pseudo'];
+					echo $_SESSION['user']['pseudo'];
+					echo anchor('Site/profil','Mon profil','title="Mon profil"');
 					echo anchor('Site/deconnexion','Se déconnecter','title="Se déconnecter"');
 				}
 				else
@@ -49,7 +50,7 @@
 				<li> <?php echo anchor('Site/horaire','Horaire','title="Horaire de la bibliothèque"', 'class="cellules"') ?> </li>
 				<li> <?php echo anchor('Site/activites','Activités','title="Activités de la bibbliothèque"', 'class="cellules"') ?> </li>
 				<li> <?php echo anchor('Site/mondossier','Mon dossier','title="Dossier de l\'utilisateur"', 'class="cellules"') ?> </li>
-				<?php if(isset($_SESSION['user']) && $_SESSION['user'][0]['type'] == 'a')
+				<?php if(isset($_SESSION['user']) && $_SESSION['user']['type'] == 'a')
 				{
 					echo '<li>';
 					echo anchor('Admin/pageadmin','Aller à la page d\'administration','title="page administration"');
