@@ -4,7 +4,7 @@
 
 		<div id="contenu">
 	
-		<?php echo form_open('site/inscriptionamis', 'id="form1"');?>
+		<?php echo form_open('Site/inscription', 'id="form1"');?>
         	<ol>
             	<li><label for="name">Nom : </label>
             		<input type="text" name="name" id="name" placeholder="Nom et prénom" required="true" />
@@ -31,10 +31,11 @@
             		<input type="text" name="cp" id="cp" />
                 </li>
 				
-				<li><label for="cp">Pseudo : </label>
+				<li><label for="pseudo">Pseudo : </label>
             		<input type="text" name="pseudo" id="pseudo" />
+                    <?php echo form_error('pseudo', '<div class="error">', '</div>'); ?>
                 </li>
-				<li><label for="cp">Mot de passe : </label>
+				<li><label for="pass">Mot de passe : </label>
             		<input type="password" name="pass" id="pass" />
                 </li>
             </ol>   

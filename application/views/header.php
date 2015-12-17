@@ -30,14 +30,14 @@
 				if (isset ( $_SESSION ['user'] ))
 				{
 					echo '<div class="lienHautPageConn">';
-					echo $_SESSION ['user'] ['login'] ;
+					echo $_SESSION['user'][0]['pseudo'];
 					echo anchor('Site/deconnexion','Se déconnecter','title="Se déconnecter"');
 				}
 				else
 				{
 					echo '<div class="lienHautPageConn">';
 					echo anchor('Site/inscription','Inscription','title="Inscription"');
-				   echo anchor('Site/loginamis','Se Connecter','title="Connexion"');
+				   echo anchor('Site/login','Se Connecter','title="Connexion"');
 				}
 				echo '</div >';
 			?>
@@ -48,13 +48,14 @@
 				<li> <?php echo anchor('Site/index','Accueil','title="Accueil du site"', 'class="cellules"') ?> </li>
 				<li> <?php echo anchor('Site/horaire','Horaire','title="Horaire de la bibliothèque"', 'class="cellules"') ?> </li>
 				<li> <?php echo anchor('Site/activites','Activités','title="Activités de la bibbliothèque"', 'class="cellules"') ?> </li>
-				<li> <?php echo anchor('Site/login','Mon dossier','title="Dossier de l\'utilisateur"', 'class="cellules"') ?> </li>
-				<?php if(isset($_SESSION['user']))
+				<li> <?php echo anchor('Site/mondossier','Mon dossier','title="Dossier de l\'utilisateur"', 'class="cellules"') ?> </li>
+				<?php if(isset($_SESSION['user']) && $_SESSION['user'][0]['type'] == 'a')
 				{
-					echo anchor('Site/pageadmin','Aller à la page d\'administration','title="page administration"');
+					echo '<li>';
+					echo anchor('Admin/pageadmin','Aller à la page d\'administration','title="page administration"');
+					echo '</li>';
 				}
 				?>
-				<li> <?php echo anchor('Site/pageadmin','Page d\'administration','title="page administration"'); ?> </li>
 				<li> <?php echo anchor('Site/nous_joindre','Nous joindre','title="Nous joindre"', 'class="cellules"') ?> </li>
 			</ul>
 		</div><!--Fin de menu-->
