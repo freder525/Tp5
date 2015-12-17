@@ -5,28 +5,23 @@
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <title>Bibliothèque Moncalm</title>
 <link rel="stylesheet" href="<?php echo base_url();?>css/styles.css" type="text/css" media="screen" />
-
+<script type='text/JavaScript' src='../../js/jquery-1.11.3.js'></script> 
+<script type='text/JavaScript' src='../../js/recherche.js'></script> 
 </head>
 
 <body>
 	<div id ="conteneur">
 		<header>
-        	<h1><a href='index'>
-			<?php
-				$image_properties = array(
-					'src' => 'images/logo.png',
-					'class' => 'logo',
-					'alt' => 'Logo de la page'
-					);
-					echo img($image_properties);?>
-					Bibliothèque Moncalm
-			</a></h1>
+        	<h1>
+			<?php $image_properties = array('src' => 'images/logo.png','class' => 'logo','alt' => 'Logo de la page'); ?>
+			<?php echo anchor('Site/index', img($image_properties))?>
+			
+		
+			 
+				Bibliothèque Moncalm
+</h1>
 			<?php
 		
-				
- 
-
-
 				if (isset ( $_SESSION ['user'] ))
 				{
 					echo '<div class="lienHautPageConn">';
@@ -41,6 +36,12 @@
 				}
 				echo '</div >';
 			?>
+				<?php echo form_open('site/recherche', 'id="formRecherche"');?>
+			
+			<input type="text" name="recherche"  />
+			<input type="submit" name="bouton"  value="Rechercher" />
+			
+			 <?php echo form_close();?>
 		</header>
 
 		<div id="menu">

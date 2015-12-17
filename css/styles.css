@@ -227,7 +227,7 @@ margin:0px auto;
 	font-weight: normal;
 }
 
-input[type="submit"]{
+# form1 input[type="submit"]{
 
 	color:white;
 	width:175px;
@@ -238,7 +238,7 @@ input[type="submit"]{
 	font-size:20px;
 	
 }
-input[type="submit"]:hover{
+#form1 input[type="submit"]:hover{
 	background:RGB(120,190,40);
 }
 

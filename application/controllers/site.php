@@ -26,6 +26,10 @@ class Site extends CI_Controller {
 	{
 		$this->load->view('vinscription');
 	}
+	public function recherche()
+	{
+		$this->load->view('vrecherche');
+	}
 		public function horaire()
 	{
 		$this->load->view('vhoraire');
