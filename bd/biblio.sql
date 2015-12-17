@@ -23,40 +23,6 @@ SET time_zone = "+00:00";
 USE `bibliotheque`;
 
 -- --------------------------------------------------------
-
---
--- Structure de la table `amis`
---
-
-CREATE TABLE  `amis` (
-  `id` varchar(10) NOT NULL,
-  `nom` varchar(30) NOT NULL,
-  `adresse` varchar(30) NOT NULL,
-  `ville` varchar(20) NOT NULL,
-  `cp` varchar(7) NOT NULL,
-  `motdepasse` varchar(20) NOT NULL,
-  `telephone` varchar(12) NOT NULL,
-  `courriel` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `nom` (`nom`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `amis`
---
-
-INSERT INTO `amis` (`id`, `nom`, `adresse`, `ville`, `cp`, `motdepasse`, `telephone`, `courriel`) VALUES
-('agervais', 'Gervais Alain', '123 rue des sapins', 'QuÃ©bec', 'G2B 3S5', '12345', '418 234-5678', 'agervais@abc.com'),
-('blandry', 'Landry Bernard', '23 rue des Ã©pinettes', 'QuÃ©bec', 'G3R 2S5', '12345', '418 456-263', 'blandry@cms.ca'),
-('dmario', 'Dumont Mario', '275 rue des ivettes', 'QuÃ©bec', 'G5R 2R5', '12345', '418 345-0987', 'dmario@libero.ca'),
-('drichard', 'Richard Daniel', '123 rue des Ã‰pinettes', 'QuÃ©bec', 'G1V 2S9', '12345', '418 678-0978', 'drichard@abcde.ca'),
-('gmichel', 'Gagnon michel', '25 rue des Ã©rables', 'QuÃ©bec', 'G2B 4S6', '12345', '418 345-8904', 'gmichel@rts.com'),
-('msandrine', 'Menard Sandrine', '234 rue des hirondelles', 'Québec', 'G3D 2F5', '12345', '418 123-0987', 'msandrine@csf.com'),
-('nick', 'Nick', '12324', '12312', 'G1Mjkjk', '1234', '4128----', 'nick@toto.com'),
-('sbrown', 'Brown Sami', '125 rue de la Loire', 'QuÃ©bec', 'G1S 2B5', '12345', '418 234-5678', 'sbrown@sifo.com'),
-('schicotte', 'Chicotte Samuel', '234 rue des peupliers', 'QuÃ©bec', 'G3S 2G5', '12345', '418 456-0987', 'schicotte@abcdef.com');
-
 -- --------------------------------------------------------
 
 --
@@ -87,28 +53,34 @@ INSERT INTO `billets` (`id`, `contenu`, `id_ami`) VALUES
 --
 
 CREATE TABLE  `lecteur` (
-  `id` varchar(10) NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(40) NOT NULL,
   `adresse` varchar(60) NOT NULL,
   `ville` varchar(40) NOT NULL,
   `cp` varchar(7) NOT NULL,
   `telephone` varchar(13) NOT NULL,
+  `courriel` varchar(20) NOT NULL,
+  `pseudo` varchar(20) NOT NULL,
   `motdepasse` varchar(20) NOT NULL,
+  `commentaire` varchar(255) NOT NULL,
   `type` char(1) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `nom` (`nom`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `lecteur`
 --
 
-INSERT INTO `lecteur` (`id`, `nom`, `adresse`, `ville`, `cp`, `telephone`, `motdepasse`, `type`) VALUES
-('1122334455', 'Tremblay Samuel', '231 rue de la Loire', 'Québec', 'G1V 2S3', '418 2349865', 'samuel', 'u'),
-('1233400001', 'Dumont, Simon', '10650, rue de la Loire', 'Québec', 'G1V 2S7', '418 123-4567', '1234567890', 'u'),
-('1233400002', 'Landry, Sylvie', '250, rue Fraser', 'Québec', 'G2R 3S2', '418 987-6543', '0123456789', 'u'),
-('1234567890', 'Gagnon', '26 rue de la Loire', 'Québec', 'G1V 3S4', '418 234-0987', '1234567890', 'a'),
-('admin', 'Gagné susanne', '12345, boulevard Charest-ouest', 'Québec', 'G2S 3R5', '418 3456278', 'administrateur', 'a');
+INSERT INTO `lecteur` (`id`, `nom`, `adresse`, `ville`, `cp`, `telephone`, `courriel`, `pseudo`, `motdepasse`, `commentaire`, `type`) VALUES
+(1, 'Gervais Alain', '123 rue des sapins', 'Québec', 'G2B 3S5', '418 234-5678', 'agervais@abc.com', 'agervais', '12345', 'Rien de particulier.', 'u'),
+(2, 'Landry Bernard', '23 rue des épinettes', 'Québec', 'G3R 2S5', '418 456-263', 'blandry@cms.ca', 'blandry', '12345', 'Rien de particulier.', 'u'),
+(3, 'Dumont Mario', '275 rue des ivettes', 'Québec', 'G5R 2R5', '418 345-0987', 'dmario@libero.ca', 'dmario', '12345', 'Rien de particulier.', 'u'),
+(4, 'Richard Daniel', '123 rue des épinettes', 'Québec', 'G1V 2S9', '418 678-0978', 'drichard@abcde.ca', 'drichard', '12345', 'Rien de particulier.', 'u'),
+(5, 'Gagnon michel', '25 rue des érables', 'Québec', 'G2B 4S6', '418 345-8904', 'gmichel@rts.com', 'gmichel', '12345', 'Rien de particulier.', 'u'),
+(6, 'Menard Sandrine', '234 rue des hirondelles', 'Québec', 'G3D 2F5', '418 123-0987', 'msandrine@csf.com', 'msandrine', '12345', 'Rien de particulier.', 'u'),
+(7, 'Nick', '12324', '12312', 'G1Mjkjk', '4128----', 'nick@toto.com', 'nick', '12345', 'Rien de particulier.', 'u'),
+(8, 'Brown Sami', '125 rue de la Loire', 'Québec', 'G1S 2B5', '418 234-5678', 'sbrown@sifo.com', 'sbrown', '12345', 'Rien de particulier.', 'a'),
+(9, 'Chicotte Samuel', '234 rue des peupliers', 'Québec', 'G3S 2G5', '418 456-0987', 'schicotte@abcdef.com', 'schicotte', '12345', 'Rien de particulier.', 'a');
 
 -- --------------------------------------------------------
 
@@ -123,8 +95,8 @@ CREATE TABLE `livre` (
   `annee` smallint(5) unsigned NOT NULL DEFAULT '0',
   `genre` varchar(32) NOT NULL,
   `etat` varchar(20) NOT NULL DEFAULT 'Disponible',
-  `id_emprunt` varchar(10) NOT NULL,
-  `id_reserve` varchar(10) NOT NULL,
+  `id_emprunt` int,
+  `id_reserve` int,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -133,14 +105,14 @@ CREATE TABLE `livre` (
 --
 
 INSERT INTO `livre` (`id`, `titre`, `auteur`, `annee`, `genre`, `etat`, `id_emprunt`, `id_reserve`) VALUES
-(' 006.76 P5759h', 'PHP et MySQL : maîtrisez le développement d''un site Web dynamique et interactif', 'Heurtel, Olivier', 2014, 'Sciences, informatique', 'Emprunté', '1233400002', '1122334455'),
-('005.133 P5759L', 'PHP 5 : industrialisation : outils & bonnes pratiques', 'Lï¿½pine, Jean-Franï¿½ois', 2012, 'Sciences, informatique', 'Emprunté', '1233400001', 'admin'),
+(' 006.76 P5759h', 'PHP et MySQL : maîtrisez le développement d''un site Web dynamique et interactif', 'Heurtel, Olivier', 2014, 'Sciences, informatique', 'Emprunté', '1', '2'),
+('005.133 P5759L', 'PHP 5 : industrialisation : outils & bonnes pratiques', 'L\'épine, Jean-François', 2012, 'Sciences, informatique', 'Emprunté', '9', '3'),
 ('006.76 P5758h', 'PHP 5.5 : développez un site Web dynamique et interactif', 'Heurtel, Olivier', 2013, 'Sciences, informatique', 'Disponible', '', ''),
-('123.456 h57', 'Les 7 mercenaires', 'Gervais Alain', 1988, 'Roman', 'Emprunté', 'admin', ''),
-('234.345 T35', 'Les bronzÃ©s', 'Tremblay Gerald', 2002, 'Roman', 'Disponible', '', ''),
-('641.5952 T6562s', 'Sushis : makis, yakitoris, onigiris-- ', 'Tombini, Marie-Laure', 2013, 'Cuisine', 'Emprunté', '1122334455', '1233400001'),
-('641.82 T788s', 'Sushi végétarien ', 'Treloar, Brigid', 2014, 'Cuisine', 'Emprunté', '1122334455', '1233400002'),
-('841.8 B338f', 'Les fleurs du mal', 'Baudelaire, Charles', 2006, 'Poésie', 'Emprunté', '1233400001', '1122334455'),
+('123.456 h57', 'Les 7 mercenaires', 'Gervais Alain', 1988, 'Roman', 'Emprunté', '5', ''),
+('234.345 T35', 'Les bronzés', 'Tremblay Gerald', 2002, 'Roman', 'Disponible', '', ''),
+('641.5952 T6562s', 'Sushis : makis, yakitoris, onigiris-- ', 'Tombini, Marie-Laure', 2013, 'Cuisine', 'Emprunté', '6', '8'),
+('641.82 T788s', 'Sushi végétarien ', 'Treloar, Brigid', 2014, 'Cuisine', 'Emprunté', '4', '5'),
+('841.8 B338f', 'Les fleurs du mal', 'Baudelaire, Charles', 2006, 'Poésie', 'Emprunté', '6', '7'),
 ('848.914 B7165p', 'Poésie et photographie', 'Bonnefoy, Yves', 2014, 'Poésie', 'Disponible', '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
