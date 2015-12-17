@@ -24,22 +24,48 @@ class Site extends CI_Controller {
 	}
 	public function inscription()
 	{
+		//TODO : Ajouter tous les champs à valider côté PHP
+		$this->form_validation->set_rules('pseudo','Pseudo','required|callback_pseudoValide');
+		
+		if($_SERVER['REQUEST_METHOD'] == 'POST')
+		{
+			if ($this->form_validation->run())
+			{
+				$this->mindex->ajouterutilisateur($this->input->post('name'),$this->input->post('email'),$this->input->post('tel'),
+				$this->input->post('adresse'), $this->input->post('ville'), $this->input->post('cp'), 
+				$this->input->post('pseudo'), $this->input->post('pass'), $this->input->post('commentaire')); 
+			}
+		}
+
 		$this->load->view('vinscription');
 	}
-		public function horaire()
+	function pseudoValide($pseudo)
+	{
+		//Vérifie en asynchrone si le pseudo est pris
+		if($this->mindex->pseudoEstPris($pseudo))
+		{
+			$this->form_validation->set_message('pseudoValide', 'Le pseudo est déjà pris.');
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	public function horaire()
 	{
 		$this->load->view('vhoraire');
 	}
-		public function activites()
+	public function activites()
 	{
 		$this->load->view('vactivites');
 	}
-		public function login()
+	public function login()
 	{
 		$data['chaine']="";
 		$this->load->view('vlogin',$data);
 	}
-		public function nous_joindre()
+	public function nous_joindre()
 	{
 		$this->load->view('vnous_joindre');
 	}
@@ -47,10 +73,53 @@ class Site extends CI_Controller {
 	{
 		$this->load->view('vaccessibilite');
 	}
-		public function loginamis()
+	public function mondossier()
 	{
-		$data['chaine']="";
-		$this->load->view('vloginamis',$data);
+		if($this->mindex->estConnecte())
+		{
+			$resultat1=$this->mindex->livresempruntes($_SESSION['user']['id']);
+			$resultat2=$this->mindex->livresreserves($_SESSION['user']['id']);
+			$param=array(
+				'usertype'=>$_SESSION['user']['type'],
+				'empruntes'=>$resultat1,
+				'reserves'=>$resultat2,
+				);
+			$this->load->view('vpageutilisateur', $param);
+		}
+		else
+		{
+			$this->login();
+		}
+		
+	}
+	public function profil()
+	{
+		if($this->mindex->estConnecte())
+		{
+			if ($this->form_validation->run())
+			{
+
+			}
+			else
+			{
+				//Récupérer les informations de l'usager
+				$donneesUsager = $this->mindex->infosprofilutilisateur($_SESSION['user']['id']);
+				$param = array('nom' => $donneesUsager['nom'],
+							   'adresse' => $donneesUsager['adresse'],
+							   'ville' => $donneesUsager['ville'],
+							   'cp' => $donneesUsager['cp'],
+							   'telephone' => $donneesUsager['telephone'],
+							   'courriel' => $donneesUsager['courriel'],
+							   'pseudo' => $donneesUsager['pseudo'],
+							   'commentaire' => $donneesUsager['commentaire']);
+			}
+
+			$this->load->view('vprofil', $param);
+		}
+		else
+		{
+			$this->login();
+		}
 	}
 	public function pageutilisateur(){
 		$this->form_validation->set_rules('login','Nom d\'utilisateur','trim|required');
@@ -67,14 +136,17 @@ class Site extends CI_Controller {
 			$this->load->view('vlogin', $data);
 			}
 			else{
-			$resultat1=$this->mindex->livresempruntes($login);
-			$resultat2=$this->mindex->livresreserves($login);
-			$param=array(
-				'usertype'=>$rs[0]['type'],
-				'empruntes'=>$resultat1,
-				'reserves'=>$resultat2,
-				);
-			$this->load->view('vpageutilisateur', $param);
+				//Ajouter l'usager à la session
+				$this->session->set_userdata('user', $rs);
+
+				$resultat1=$this->mindex->livresempruntes($rs['id']);
+				$resultat2=$this->mindex->livresreserves($rs['id']);
+				$param=array(
+					'usertype'=>$rs['type'],
+					'empruntes'=>$resultat1,
+					'reserves'=>$resultat2,
+					);
+				$this->load->view('vpageutilisateur', $param);
 			}
 		}
 		else 
@@ -82,46 +154,6 @@ class Site extends CI_Controller {
 		$data['chaine']="";	
 		$this->load->view('vlogin', $data);
 		}
-	}
-		public function amiconnecte(){
-		$this->form_validation->set_rules('login','Nom d\'utilisateur','trim|required');
-		$this->form_validation->set_rules('pass','Mot de passe','trim|required');
-		if ($this->form_validation->run())
-		{
-			 $login=$this->input->post('login');
-			$pass=$this->input->post('pass');
- 
-			$rs=$this->mindex->authentifami($login, $pass);
-			if (count($rs)==0){
-				$data['chaine']="Mot de passe ou nom d'utilisateur incorrect";
-			$this->load->view('vloginamis', $data);
-			}
-			else{
-			$resultat=$this->mindex->readalltable('billets');
-			$param=array(
-				'login'=>$login,
-				'commentaires'=>$resultat,
-				);
-			$this->load->view('vamiconnecte', $param);
-			}
-		}
-		else 
-		{
-			$data['chaine']="";
-			$this->load->view('vloginamis', $data);
-		}
-	}
-	public function inscriptionamis()
-	{
-		$this->mindex->ajouterami($this->input->post('name'),$this->input->post('email'),$this->input->post('tel'),
-		$this->input->post('adresse'), $this->input->post('ville'), $this->input->post('cp'), 
-		$this->input->post('pseudo'), $this->input->post('pass'), $this->input->post('commentaire')); 
-		
-		redirect('site/inscription');
-	}
-	public function pageadmin(){
-	$param['resultat']=$this->mindex->readalltable('livre');	
-	$this->load->view('vlivreGestion',$param);	
 	}
 	public function livreSupp($id){
 	$this->mindex->supprimerlivre('livre',$id);
