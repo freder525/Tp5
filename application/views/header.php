@@ -45,6 +45,7 @@
 			<input type="submit" name="bouton"  value="Rechercher" />
 			
 			 <?php echo form_close();?>
+			 <?php echo anchor('#contenu','Contenu','class="contenuPrinc"','title="contenu"') ?>
 		</header>
 
 		<div id="menu">

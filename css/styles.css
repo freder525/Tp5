@@ -23,6 +23,23 @@ clear:both;
 	margin:0 auto;
 	background-color:#F6F4EA;
 }
+.contenuPrinc
+{
+color:white;
+font-size: 18px;
+}
+.contenuPrinc:visited
+{
+color:white;
+
+
+}
+.contenuPrinc:hover
+{
+color:RGB(120,190,40);
+
+
+}
 header
 {
 position:relative;
