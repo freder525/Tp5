@@ -47,7 +47,7 @@
             
             </li>
         </ol>
-        <input type="submit" value="S'inscrire" />
+        <input class="boutton" type="submit" value="S'inscrire" />
 		<?php echo form_close();?>
 
 		</div><!--Fin de contenu-->

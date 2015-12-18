@@ -34,8 +34,9 @@ border-bottom : 2px;
 }
 header h1
 {
-	width : 400px;
+
 	color : white;
+	display : inline-block
 }
 header h1>a
 {
@@ -56,14 +57,30 @@ footer {width:100%; position:relative; overflow:hidden; text-align:center; paddi
 footer p, footer a {color:white;}
 .lienHautPageConn
 {
-display:inline-block;margin-left:800px;
+display:inline-block;
+margin-left:40%;
 margin-top: 0px;
+padding-bottom: 10px;
+color : white;
+width : 300px;
 }
 .lienHautPageConn a
 {
-	padding-left: 10px;
+	padding-left: 20px;
 	text-decoration : none;
+	color : white;
 	
+}
+.lienHautPageConn a:visited
+{
+
+	color : white;
+	
+}
+.lienHautPageConn a:hover
+{
+
+	background:RGB(120,190,40);
 }
 hr
 {
@@ -227,7 +244,7 @@ margin:0px auto;
 	font-weight: normal;
 }
 
-# form1 input[type="submit"]{
+.boutton{
 
 	color:white;
 	width:175px;
@@ -238,7 +255,7 @@ margin:0px auto;
 	font-size:20px;
 	
 }
-#form1 input[type="submit"]:hover{
+.boutton:hover{
 	background:RGB(120,190,40);
 }
 

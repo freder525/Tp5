@@ -12,6 +12,7 @@
 <body>
 	<div id ="conteneur">
 		<header>
+		<div>
         	<h1>
 			<?php $image_properties = array('src' => 'images/logo.png','class' => 'logo','alt' => 'Logo de la page'); ?>
 			<?php echo anchor('Site/index', img($image_properties))?>
@@ -37,6 +38,7 @@
 				}
 				echo '</div >';
 			?>
+			</div>
 				<?php echo form_open('site/recherche', 'id="formRecherche"');?>
 			
 			<input type="text" name="recherche"  />

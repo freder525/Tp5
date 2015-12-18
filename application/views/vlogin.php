@@ -13,7 +13,7 @@
 		<input type="password" name="pass" />
 		<?php echo form_error('pass', '<div class="error">', '</div>'); ?>
 		<br/>
-		<input type="submit" value = "Connexion" />
+		<input class="boutton" type="submit" value = "Connexion" />
 		<?php form_close();?>
 		
 		<?php echo $chaine; ?>
