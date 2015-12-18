@@ -16,7 +16,7 @@
                 </li>
                 
                <li><label for="tel">Téléphone : </label>
-            		<input type="tel" name="tel" id="tel" />
+            		<input type="text" name="tel" id="tel" />
                 </li>
                 
                 <li><label for="adresse">Adresse : </label>
@@ -42,7 +42,7 @@
  
         <ol>
         	<li>
-            	<label for="renseignements">Commentaires</label>
+            	<label for="renseignements">Commentaires : </label>
                 <textarea id="renseignements"  name="commentaire" rows="5" required ></textarea>
             
             </li>

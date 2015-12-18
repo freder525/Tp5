@@ -250,7 +250,7 @@ margin:0px auto;
 
 #form1 label
 {
-	width:130px;
+	width:200px;
 	display : inline-block;
 	
 }
@@ -273,12 +273,18 @@ margin:0px auto;
 
 #form2 label
 {
-	width:80px;
+	width:120px;;
 	display : inline-block;
 	
 }
 #form2 input[type="text"]{
 	width:400px;
+}
+#form1 input[type="email"]{
+	width:172px;;
+}
+#form1 input[type="password"]{
+	width:172px;;
 }
 #bold
 {	
