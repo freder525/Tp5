@@ -34,7 +34,7 @@ class Admin extends CI_Controller {
 	}
 
 	private function estAdmin(){
-		if(isset($_SESSION['user']) && $_SESSION['user'][0]['type'] == 'a')
+		if(isset($_SESSION['user']) && $_SESSION['user']['type'] == 'a')
 		{
 			return true;
 		}

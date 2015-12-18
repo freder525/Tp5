@@ -45,6 +45,7 @@
 			<input type="submit" name="bouton"  value="Rechercher" />
 			
 			 <?php echo form_close();?>
+			 <?php echo anchor('#contenu','Contenu','class="contenuPrinc"','title="contenu"') ?>
 		</header>
 
 		<div id="menu">
@@ -56,7 +57,7 @@
 				<?php if(isset($_SESSION['user']) && $_SESSION['user']['type'] == 'a')
 				{
 					echo '<li>';
-					echo anchor('Admin/pageadmin','Aller à la page d\'administration','title="page administration"');
+					echo anchor('Admin/pageadmin','Page Administrative','title="page administration"');
 					echo '</li>';
 				}
 				?>
