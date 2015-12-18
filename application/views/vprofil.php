@@ -26,7 +26,7 @@
                 </li>
                 
                <li><label for="telephone">Téléphone : </label>
-            		<input type="tel" name="telephone" id="telephone" value="<?php echo (isset($telephone) ? $telephone : ''); ?>" />
+            		<input type="text" name="telephone" id="telephone" value="<?php echo (isset($telephone) ? $telephone : ''); ?>" />
                 </li>
                 
                 <li><label for="adresse">Adresse : </label>
