@@ -29,7 +29,7 @@ class Mindex extends CI_Model {
 		$this->db->delete('billets', array('id' => $id)); 
 	}
 	
-	public function ajouterutilisateur($name, $email, $tel, $adresse, $ville, $cp, $pseudo, $pass, $commentaire)
+	public function ajouterutilisateur($name, $email, $tel, $adresse, $ville, $cp, $pseudo, $pass)
 	{					
 		$data = array(
 			'nom'=>$name,
@@ -40,7 +40,6 @@ class Mindex extends CI_Model {
 			'courriel'=>$email,
 			'pseudo'=>$pseudo,
 			'motdepasse'=>$pass,
-			'commentaire'=>$commentaire,
 			'type'=>'u'
 		);
 		$this->db->insert('lecteur', $data);
@@ -50,6 +49,16 @@ class Mindex extends CI_Model {
 			'id_ami'=>$pseudo
 		);
 		$this->db->insert('billets',$data);
+	}
+	public function modifierutilisateur($idUsager, $donneesUsager)
+	{
+		$this->db->where('id', $idUsager);
+		$this->db->update('lecteur', $donneesUsager);
+	}
+	public function modifiermotpasseutilisteur($idUsager, $motDePasse)
+	{
+		$this->db->where('id', $idUsager);
+		$this->db->update('lecteur', array('motdepasse' => $motDePasse));
 	}
 	public function authentifutilisateur($login, $pass){ 
 		$this->db->select('id, pseudo, type');
@@ -61,7 +70,7 @@ class Mindex extends CI_Model {
 	}
 	public function infosprofilutilisateur($idUsager)
 	{
-		$this->db->select('nom, adresse, ville, cp, telephone, courriel, pseudo, commentaire');
+		$this->db->select('nom, adresse, ville, cp, telephone, courriel, pseudo');
 		$this->db->from('lecteur');
 		$this->db->where(array('id' => $idUsager));
 		$requeteProfil = $this->db->get();
