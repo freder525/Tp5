@@ -75,6 +75,7 @@ class Mindex extends CI_Model {
 		return $resultat1->result_array();
 		
 	}
+
 	public function livresreserves($id){
 		$this->db->select('titre, auteur, id_emprunt');
 		$this->db->from('livre');

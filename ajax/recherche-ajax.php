@@ -4,11 +4,11 @@
 // Nom Fichier : recherche.php
 // Date: 2015-03-31
 $msgErreur = null;
-if (isset ( $_GET ["recherche"] ))
+if (isset ( $_POST ["recherche"] ))
 {
 	
 	// L'id que le carrousel désire
-	$recherche = $_GET ["recherche"];
+	$recherche = $_POST ["recherche"];
 
 	try
 	{

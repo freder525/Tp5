@@ -42,6 +42,7 @@ class Site extends CI_Controller {
 
 	public function recherche()
 	{
+
 		$this->load->view('vrecherche');
 	}
 	public function horaire()

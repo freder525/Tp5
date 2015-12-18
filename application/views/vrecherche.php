@@ -3,7 +3,6 @@
 		?>
 <div id='contenu'>
 			<div>
-				<p id="titre"></p>
 				<div id="info"></div>
 			</div>
   </div>

@@ -5,8 +5,8 @@
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <title>Bibliothèque Moncalm</title>
 <link rel="stylesheet" href="<?php echo base_url();?>css/styles.css" type="text/css" media="screen" />
-<script type='text/JavaScript' src='../../js/jquery-1.11.3.js'></script> 
-<script type='text/JavaScript' src='../../js/recherche.js'></script> 
+<script type='text/JavaScript' src=" <?php echo base_url().'assets/js/jquery-1.11.3'; ?>"</script> 
+<script type='text/JavaScript' src=" <?php echo base_url().'assets/js/recherche.js'; ?>"</script> 
 </head>
 
 <body>
@@ -41,8 +41,8 @@
 			</div>
 				<?php echo form_open('site/recherche', 'id="formRecherche"');?>
 			
-			<input type="text" name="recherche"  />
-			<input type="submit" name="bouton"  value="Rechercher" />
+			<input type="text" name="recherche"  id="champsRecherche" />
+			<input type="submit" name="bouton"  value="Rechercher"  id="btnRecherche"/>
 			
 			 <?php echo form_close();?>
 			 <?php echo anchor('#contenu','Contenu','class="contenuPrinc"','title="contenu"') ?>
