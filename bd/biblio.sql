@@ -62,7 +62,6 @@ CREATE TABLE  `lecteur` (
   `courriel` varchar(20) NOT NULL,
   `pseudo` varchar(20) NOT NULL,
   `motdepasse` varchar(20) NOT NULL,
-  `commentaire` varchar(255) NOT NULL,
   `type` char(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -71,16 +70,16 @@ CREATE TABLE  `lecteur` (
 -- Contenu de la table `lecteur`
 --
 
-INSERT INTO `lecteur` (`id`, `nom`, `adresse`, `ville`, `cp`, `telephone`, `courriel`, `pseudo`, `motdepasse`, `commentaire`, `type`) VALUES
-(1, 'Gervais Alain', '123 rue des sapins', 'Québec', 'G2B 3S5', '418 234-5678', 'agervais@abc.com', 'agervais', '12345', 'Rien de particulier.', 'u'),
-(2, 'Landry Bernard', '23 rue des épinettes', 'Québec', 'G3R 2S5', '418 456-263', 'blandry@cms.ca', 'blandry', '12345', 'Rien de particulier.', 'u'),
-(3, 'Dumont Mario', '275 rue des ivettes', 'Québec', 'G5R 2R5', '418 345-0987', 'dmario@libero.ca', 'dmario', '12345', 'Rien de particulier.', 'u'),
-(4, 'Richard Daniel', '123 rue des épinettes', 'Québec', 'G1V 2S9', '418 678-0978', 'drichard@abcde.ca', 'drichard', '12345', 'Rien de particulier.', 'u'),
-(5, 'Gagnon michel', '25 rue des érables', 'Québec', 'G2B 4S6', '418 345-8904', 'gmichel@rts.com', 'gmichel', '12345', 'Rien de particulier.', 'u'),
-(6, 'Menard Sandrine', '234 rue des hirondelles', 'Québec', 'G3D 2F5', '418 123-0987', 'msandrine@csf.com', 'msandrine', '12345', 'Rien de particulier.', 'u'),
-(7, 'Nick', '12324', '12312', 'G1Mjkjk', '4128----', 'nick@toto.com', 'nick', '12345', 'Rien de particulier.', 'u'),
-(8, 'Brown Sami', '125 rue de la Loire', 'Québec', 'G1S 2B5', '418 234-5678', 'sbrown@sifo.com', 'sbrown', '12345', 'Rien de particulier.', 'a'),
-(9, 'Chicotte Samuel', '234 rue des peupliers', 'Québec', 'G3S 2G5', '418 456-0987', 'schicotte@abcdef.com', 'schicotte', '12345', 'Rien de particulier.', 'a');
+INSERT INTO `lecteur` (`id`, `nom`, `adresse`, `ville`, `cp`, `telephone`, `courriel`, `pseudo`, `motdepasse`, `type`) VALUES
+(1, 'Gervais Alain', '123 rue des sapins', 'Québec', 'G2B 3S5', '418 234-5678', 'agervais@abc.com', 'agervais', '12345', 'u'),
+(2, 'Landry Bernard', '23 rue des épinettes', 'Québec', 'G3R 2S5', '418 456-263', 'blandry@cms.ca', 'blandry', '12345', 'u'),
+(3, 'Dumont Mario', '275 rue des ivettes', 'Québec', 'G5R 2R5', '418 345-0987', 'dmario@libero.ca', 'dmario', '12345', 'u'),
+(4, 'Richard Daniel', '123 rue des épinettes', 'Québec', 'G1V 2S9', '418 678-0978', 'drichard@abcde.ca', 'drichard', '12345', 'u'),
+(5, 'Gagnon michel', '25 rue des érables', 'Québec', 'G2B 4S6', '418 345-8904', 'gmichel@rts.com', 'gmichel', '12345', 'u'),
+(6, 'Menard Sandrine', '234 rue des hirondelles', 'Québec', 'G3D 2F5', '418 123-0987', 'msandrine@csf.com', 'msandrine', '12345', 'u'),
+(7, 'Nick', '12324', '12312', 'G1Mjkjk', '4128----', 'nick@toto.com', 'nick', '12345', 'u'),
+(8, 'Brown Sami', '125 rue de la Loire', 'Québec', 'G1S 2B5', '418 234-5678', 'sbrown@sifo.com', 'sbrown', '12345', 'a'),
+(9, 'Chicotte Samuel', '234 rue des peupliers', 'Québec', 'G3S 2G5', '418 456-0987', 'schicotte@abcdef.com', 'schicotte', '12345', 'a');
 
 -- --------------------------------------------------------
 
