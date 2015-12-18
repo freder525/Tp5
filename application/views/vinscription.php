@@ -39,7 +39,7 @@
             		<input type="password" name="pass" id="pass" />
                 </li>
             </ol>   
-<<<<<<< HEAD
+
  
         <ol>
         	<li>
@@ -48,8 +48,7 @@
             
             </li>
         </ol>
-=======
->>>>>>> origin/master
+
         <input class="boutton" type="submit" value="S'inscrire" />
 		<?php echo form_close();?>
 
