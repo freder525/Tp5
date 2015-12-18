@@ -33,7 +33,7 @@ class Site extends CI_Controller {
 			{
 				$this->mindex->ajouterutilisateur($this->input->post('name'),$this->input->post('email'),$this->input->post('tel'),
 				$this->input->post('adresse'), $this->input->post('ville'), $this->input->post('cp'), 
-				$this->input->post('pseudo'), $this->input->post('pass'), $this->input->post('commentaire')); 
+				$this->input->post('pseudo'), $this->input->post('pass')); 
 			}
 		}
 
@@ -103,22 +103,74 @@ class Site extends CI_Controller {
 	{
 		if($this->mindex->estConnecte())
 		{
-			if ($this->form_validation->run())
-			{
+			//Récupérer les informations de l'usager
+			$donneesSessUsager = $this->mindex->infosprofilutilisateur($_SESSION['user']['id']);
 
-			}
-			else
+			$param = array('nom' => $donneesSessUsager['nom'],
+						   'adresse' => $donneesSessUsager['adresse'],
+						   'ville' => $donneesSessUsager['ville'],
+						   'cp' => $donneesSessUsager['cp'],
+						   'telephone' => $donneesSessUsager['telephone'],
+						   'courriel' => $donneesSessUsager['courriel'],
+						   'pseudo' => $donneesSessUsager['pseudo']);
+
+			if($_SERVER['REQUEST_METHOD'] == 'POST')
 			{
-				//Récupérer les informations de l'usager
-				$donneesUsager = $this->mindex->infosprofilutilisateur($_SESSION['user']['id']);
-				$param = array('nom' => $donneesUsager['nom'],
-							   'adresse' => $donneesUsager['adresse'],
-							   'ville' => $donneesUsager['ville'],
-							   'cp' => $donneesUsager['cp'],
-							   'telephone' => $donneesUsager['telephone'],
-							   'courriel' => $donneesUsager['courriel'],
-							   'pseudo' => $donneesUsager['pseudo'],
-							   'commentaire' => $donneesUsager['commentaire']);
+				//Création des règles de validation selon le formulaire utilisé
+				$estModifInfos = false;
+				$estModifMotDePasse = false;
+				//Formulaire modification de profil
+				if($estModifInfos = $this->input->post('nom') != null)
+				{
+					$this->form_validation->set_rules('nom','Nom','required');
+					$this->form_validation->set_rules('adresse','Adresse','required');
+				}
+
+				//Formulaire de modification de mot de passe
+				if($estModifMotDePasse = $this->input->post('nouveau_pass')  != null)
+				{
+					$this->form_validation->set_rules('ancien_pass','Ancien mot de passe','required');
+					$this->form_validation->set_rules('nouveau_pass','Nouveau mot de passe','required');
+				}
+
+				if ($this->form_validation->run())
+				{
+					if($estModifInfos)
+					{
+						//Modifier les informations de l'usager
+						$donneesPostUsager = array('nom' => $this->input->post('nom'),
+									   		 	   'adresse' => $this->input->post('adresse'),
+									   		 	   'ville' => $this->input->post('ville'),
+										 	 	   'cp' => $this->input->post('cp'),
+											 	   'telephone' => $this->input->post('telephone'),
+										     	   'courriel' => $this->input->post('courriel'));
+						$this->mindex->modifierutilisateur($_SESSION['user']['id'], $donneesPostUsager);
+
+						//Redondant pour plus de clartée
+						$param = $donneesPostUsager;
+						$param['pseudo'] = $_SESSION['user']['pseudo'];
+						$param['reussite'] = 'Votre profil a bien été modifié';
+					}
+
+					if($estModifMotDePasse)
+					{
+						//Modifier le mot de passe si l'ancien est valide
+						if($this->mindex->authentifutilisateur($_SESSION['user']['pseudo'], $this->input->post('ancien_pass')) != NULL)
+						{
+							$this->mindex->modifiermotpasseutilisteur($_SESSION['user']['id'], $this->input->post('nouveau_pass'));
+							$param['reussite'] = 'Votre mot de passe a bien été modifié';
+						}
+						else
+						{
+							$param['erreur'] = 'Votre mot de passe actuel entré n\'est pas valide';
+						}
+					}
+				}
+				else
+				{
+					$param['erreur'] = 'Les champs avec une astérisque (*) sont tous obligatoires, veuillez les remplir S.V.P.';
+				}
+
 			}
 
 			$this->load->view('vprofil', $param);

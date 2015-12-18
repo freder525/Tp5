@@ -39,14 +39,6 @@
             		<input type="password" name="pass" id="pass" />
                 </li>
             </ol>   
- 
-        <ol>
-        	<li>
-            	<label for="renseignements">Commentaires</label>
-                <textarea id="renseignements"  name="commentaire" rows="5" required ></textarea>
-            
-            </li>
-        </ol>
         <input class="boutton" type="submit" value="S'inscrire" />
 		<?php echo form_close();?>
 
