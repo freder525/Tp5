@@ -2,6 +2,6 @@
 $(document).ready(function(){
 	$('#btnRecherche').click(function()
 	{
-		alert("test");
+		var $recherche = "allo";
 	});
 });

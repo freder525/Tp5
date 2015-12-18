@@ -3,7 +3,6 @@
 
 body{
 	background-color:#ddd;
-	background-image:url(images/back.png);
 	margin:0px;
 	}
 
@@ -13,6 +12,31 @@ body{
 
 	margin:0 auto;
 	
+}
+#rechercheLivre
+{
+padding-top : 10px;
+padding-left : 30px;
+}
+#resultRecherche
+{
+padding: 10px;
+margin: 30px;
+}
+#btnRecherche
+{
+color:white;
+	width:120px;
+	margin-top : 20px;
+	background: #333;
+	border-radius: 10px;
+	font-family:"Times New Roman", Times, serif;
+	font-size:14px;;
+}
+#btnRecherche:hover
+{
+background:RGB(120,190,40);
+
 }
 .clear{
 clear:both;

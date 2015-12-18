@@ -163,6 +163,15 @@ class Site extends CI_Controller {
 		$this->load->view('vlogin', $data);
 		}
 	}
+	public function rechercheLivre()
+	{
+		$recherche = $this->input->post('recherche');
+		$this->db->from('livre');
+		$this->db->like(array('titre' => $recherche));
+		$rs=$this->db->get();
+		
+		echo json_encode($rs->result_array());
+	}
 	public function livreSupp($id){
 	$this->mindex->supprimerlivre('livre',$id);
 	redirect('site/pageadmin');		

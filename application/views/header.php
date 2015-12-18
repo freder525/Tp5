@@ -5,8 +5,80 @@
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <title>Bibliothèque Moncalm</title>
 <link rel="stylesheet" href="<?php echo base_url();?>css/styles.css" type="text/css" media="screen" />
-<script type='text/JavaScript' src=" <?php echo base_url().'assets/js/jquery-1.11.3'; ?>"</script> 
-<script type='text/JavaScript' src=" <?php echo base_url().'assets/js/recherche.js'; ?>"</script> 
+<script type='text/javaScript' src="<?php echo base_url()?>js/jquery-1.11.3.js"></script> 
+<script type='text/javaScript' >
+$(document).ready(function(){
+	$('#btnRecherche').click(function()
+	{
+		var recherche = $('#champsRecherche').val();
+		
+		$.ajax({
+			type:'POST',
+			data:{recherche:recherche},
+			dataType: 'json',
+			url: '<?php echo site_url('/site/rechercheLivre')  ; ?>',
+			success : function(result){
+				$('#info').children().remove();
+				if(result.length > 0)
+				{
+				var divLivre = document.createElement( "div" );	
+				var table = document.createElement( "table" );
+				var tableBody = document.createElement( "tbody" );
+				var rowHeader = document.createElement( "tr" );
+				var titre = document.createElement( "th" );
+				var auteur = document.createElement( "th" );
+				var genre = document.createElement( "th" );
+				
+				var textTitre = document.createTextNode("Titre");
+				var textAuteur = document.createTextNode("Auteur");
+				var textGenre = document.createTextNode("Genre");
+						
+				$(table).addClass("rwd-table");
+				$(table).attr("id","resultRecherche");
+				
+				$(titre).append(textTitre);
+				$(auteur).append(textAuteur);
+				$(genre).append(textGenre);
+						
+				$(rowHeader).append(titre);
+				$(rowHeader).append(auteur);
+				$(rowHeader).append(genre);
+				
+				$(tableBody).append(rowHeader);
+				}
+				for(var i = 0; i< result.length; i++)
+				{									
+						var row = document.createElement( "tr" );
+						var dataTitre = document.createElement( "td" );
+						var dataAuteur = document.createElement( "td" );
+						var dataGenre = document.createElement( "td" );
+						
+						var textNodeT = document.createTextNode(result[i].titre);
+						var textNodeA = document.createTextNode(result[i].auteur);
+						var textNodeG = document.createTextNode(result[i].genre);
+						
+						$(dataTitre).append(textNodeT);
+						$(dataAuteur).append(textNodeA);
+						$(dataGenre).append(textNodeG);
+						
+						$(row).append(dataTitre);
+						$(row).append(dataAuteur);
+						$(row).append(dataGenre);
+						
+						$(tableBody).append(row);
+						
+				}			
+				$(table).append(tableBody);
+				$(divLivre).append(table);		
+				$('#info').append(divLivre);	
+				}
+			
+		});
+	});
+});
+
+
+</script> 
 </head>
 
 <body>
@@ -39,12 +111,8 @@
 				echo '</div >';
 			?>
 			</div>
-				<?php echo form_open('site/recherche', 'id="formRecherche"');?>
 			
-			<input type="text" name="recherche"  id="champsRecherche" />
-			<input type="submit" name="bouton"  value="Rechercher"  id="btnRecherche"/>
-			
-			 <?php echo form_close();?>
+				
 			 <?php echo anchor('#contenu','Contenu','class="contenuPrinc"','title="contenu"') ?>
 		</header>
 
@@ -54,6 +122,7 @@
 				<li> <?php echo anchor('Site/horaire','Horaire','title="Horaire de la bibliothèque"', 'class="cellules"') ?> </li>
 				<li> <?php echo anchor('Site/activites','Activités','title="Activités de la bibbliothèque"', 'class="cellules"') ?> </li>
 				<li> <?php echo anchor('Site/mondossier','Mon dossier','title="Dossier de l\'utilisateur"', 'class="cellules"') ?> </li>
+				<li> <?php echo anchor('Site/recherche','Recherche','title="Recherche"', 'class="cellules"') ?> </li>
 				<?php if(isset($_SESSION['user']) && $_SESSION['user']['type'] == 'a')
 				{
 					echo '<li>';
