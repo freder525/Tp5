@@ -57,7 +57,7 @@
 				<?php if(isset($_SESSION['user']) && $_SESSION['user']['type'] == 'a')
 				{
 					echo '<li>';
-					echo anchor('Admin/pageadmin','Aller à la page d\'administration','title="page administration"');
+					echo anchor('Admin/pageadmin','Page Administrative','title="page administration"');
 					echo '</li>';
 				}
 				?>
