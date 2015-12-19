@@ -83,22 +83,44 @@ class Site extends CI_Controller {
 	}
 	public function mondossier()
 	{
+		$resultat1=$this->mindex->livresempruntes($_SESSION['user']['id']);
+		$resultat2=$this->mindex->livresreserves($_SESSION['user']['id']);
+		$param=array(
+			'usertype'=>$_SESSION['user']['type'],
+			'empruntes'=>$resultat1,
+			'reserves'=>$resultat2,
+			);
+
 		if($this->mindex->estConnecte())
 		{
-			$resultat1=$this->mindex->livresempruntes($_SESSION['user']['id']);
-			$resultat2=$this->mindex->livresreserves($_SESSION['user']['id']);
-			$param=array(
-				'usertype'=>$_SESSION['user']['type'],
-				'empruntes'=>$resultat1,
-				'reserves'=>$resultat2,
-				);
+			if($_SERVER['REQUEST_METHOD'] == 'POST')
+			{
+				$leLivre = $this->mindex->lirelivre($this->input->post('isbn'));
+
+				if($leLivre['nbr_renouvelements'] == 3)
+				{
+					$param['erreur'] = 'Vous avez atteint le nombre maximal de renouvelements (3)';
+				}
+				else if($leLivre['id_reserve'] != 0)
+				{
+					$param['erreur'] = "L'article est réservé par une autre personne, vous ne pouvez le renouveler";
+				}
+				else
+				{
+					$this->mindex->renouveleremprunt($this->input->post('isbn'), $_SESSION['user']['id'], $leLivre['nbr_renouvelements']);
+					$param['reussite'] = "L'article a bien été renouvelé. Il vous reste ".(2 - $leLivre['nbr_renouvelements']).' renouvelement(s)';
+				}	
+			}
+			else
+			{
+
+			}
 			$this->load->view('vpageutilisateur', $param);
 		}
 		else
 		{
 			$this->login();
 		}
-		
 	}
 	public function profil()
 	{
@@ -223,6 +245,71 @@ class Site extends CI_Controller {
 		$rs=$this->db->get();
 		
 		echo json_encode($rs->result_array());
+	}
+	public function details_article($isbn)
+	{
+		$isbnConverti = str_replace("-", " ", $isbn);
+
+		$infosLivre = $this->mindex->lirelivre($isbnConverti);
+		if($infosLivre != NULL)
+		{
+			if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['user']))
+			{
+				//Note : la validation es déjà effectuée à savoir si l'article peut être emprunté ou réservé
+				if(isset($_POST['Emprunter']))
+				{
+					if($this->mindex->calculersoldeusager($_SESSION['user']['id']) < 5.00)
+					{
+						if($this->mindex->nbrempruntsusager($_SESSION['user']['id']) < 5)
+						{
+							//Les vérifications sont faites, effectuer l'emprunt
+							$this->mindex->enregistreremprunt($isbnConverti, $_SESSION['user']['id']);
+							$infosLivre['id_emprunt'] = $_SESSION['user']['id'];
+							$infosLivre['reussite'] = "L'emprunt a bien été effectuée";
+						}
+						else
+						{
+							$infosLivre['erreur'] = "Vous avez déjà atteint le nombre maximal d'emprunts (5)";
+						}	
+					}
+					else
+					{
+						$infosLivre['erreur'] = "Votre solde est trop élevé pour effectuer un emprunt";
+					}
+				}
+				else if(isset($_POST['Réserver']))
+				{
+					if($this->mindex->calculersoldeusager($_SESSION['user']['id']) < 5.00)
+					{
+						if($this->mindex->nbrreservationsusager($_SESSION['user']['id']) < 3)
+						{
+							//Les vérifications sont faites, effectuer l'emprunt
+							$this->mindex->enregistrerreservation($isbnConverti, $_SESSION['user']['id']);
+							$infosLivre['id_reserve'] = $_SESSION['user']['id'];
+							$infosLivre['reussite'] = "La réservation a bien été effectuée";
+						}
+						else
+						{
+							$infosLivre['erreur'] = "Vous avez déjà atteint le nombre maximal de réservations (3)";
+						}	
+					}
+					else
+					{
+						$infosLivre['erreur'] = "Votre solde est trop élevé pour effectuer une réservation";
+					}
+				}
+
+				$this->load->view('vdetails_article', $infosLivre);
+			}
+			else
+			{
+				$this->load->view('vdetails_article', $infosLivre);
+			}
+		}
+		else
+		{
+			show_404();
+		}
 	}
 	public function livreSupp($id){
 	$this->mindex->supprimerlivre('livre',$id);

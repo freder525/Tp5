@@ -50,14 +50,20 @@ $(document).ready(function(){
 				{									
 						var row = document.createElement( "tr" );
 						var dataTitre = document.createElement( "td" );
+
+						var lienVersDetails = document.createElement( "a" );
+						lienVersDetails.href = "details_article/" + result[i].id.replace(/ /g, '-');
+						lienVersDetails.title = result[i].titre;
+
 						var dataAuteur = document.createElement( "td" );
 						var dataGenre = document.createElement( "td" );
-						
-						var textNodeT = document.createTextNode(result[i].titre);
+
+						var textNodeLien = document.createTextNode(result[i].titre);
 						var textNodeA = document.createTextNode(result[i].auteur);
 						var textNodeG = document.createTextNode(result[i].genre);
 						
-						$(dataTitre).append(textNodeT);
+						lienVersDetails.appendChild(textNodeLien);
+						$(dataTitre).append(lienVersDetails);
 						$(dataAuteur).append(textNodeA);
 						$(dataGenre).append(textNodeG);
 						
