@@ -44,7 +44,7 @@
         <input type="submit" value="Modifier les informations" />
 		<?php echo form_close();?>
 
-        <?php echo form_open('Site/profil', 'id="form2"');?>
+        <?php echo form_open('Site/profil', 'id="form1"');?>
             <ol>
                 <li><p><b>Modification du mot de passe</b></p></li>
                 <li><label for="ancien_pass">Ancien mot de passe : </label>
