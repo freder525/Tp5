@@ -10,20 +10,25 @@ class Mindex extends CI_Model {
 		// Ce tableau sera r?cup?r? dans le controller
 		
 	}
-	public function ajouterlivre($id, $titre, $auteur, $annee, $genre, $etat)
+	public function ajouterlivre($id, $typeDoc, $titre, $auteur, $annee, $genre)
 	{					
 		$data = array(
 			'id'=>$id,
+            'type_document'=>$typeDoc,
 			'titre'=>$titre,
 			'auteur'=>$auteur,
 			'annee'=>$annee,
 			'genre'=>$genre,
-			'etat'=>$etat
+			'id_emprunt'=>0,
+            'id_reserve'=>0,
+            'nbr_renouvelements'=>0,
+            'date_emprunt'=>date("Y-m-d H:i:s")
 		);
 		$this->db->insert('livre', $data);
 	}
-	public function supprimerlivre($table, $id){
-		$this->db->delete($table, array('id' => $id)); 
+	public function supprimerlivre($id){
+        #$id = str_replace('%20', ' ', $id);
+		$this->db->delete('livre', array('id' => $id)); 
 	}
 	public function supprimercommentaire($id){
 		$this->db->delete('billets', array('id' => $id)); 

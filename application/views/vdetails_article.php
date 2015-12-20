@@ -28,15 +28,18 @@
 							echo "Disponible";
 							$valeurFormulaire = "Emprunter";
 						}
-						else if($id_emprunt == $_SESSION['user']['id'])
+                        else
 						{
-							echo "Emprunté (par vous)";
-						}
-						else
-						{
-							echo "Emprunté";
-							$valeurFormulaire = "Réserver";
-						}					
+                            if(isset($_SESSION['user']['id']) && $id_emprunt == $_SESSION['user']['id'])
+                            {
+                                echo "Emprunté (par vous)";                                
+                            }
+                            else{
+                                echo "Emprunté";
+                                $valeurFormulaire = "Réserver";
+                            }
+                            
+						}		
 					}
 					else
 					{

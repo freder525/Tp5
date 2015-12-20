@@ -43,5 +43,53 @@ class Admin extends CI_Controller {
 			return false;
 		}
 	}
+    
+    public function ajouterLivre(){
+        if($this->estAdmin()){                       
+            $this->load->view('vmodifierlivre');	
+        }
+        else{
+            redirect('Site/mondossier');
+        }        		
+	}
+    
+    public function insererLivre(){
+        if($this->estAdmin()){                       
+            $this->mindex->ajouterlivre($this->input->post('id'), $this->input->post('typeDoc'), $this->input->post('titre'),$this->input->post('auteur'),
+            $this->input->post('annee'), $this->input->post('genre')); 
+		
+		redirect('admin/pageadmin');	
+        }
+        else{
+            redirect('Site/mondossier');
+        }        		
+	}
+    
+    public function livreSupp($id){
+        if($this->estAdmin()){
+            $this->mindex->supprimerlivre(rawurldecode($id));            
+            redirect('admin/pageadmin');
+        }
+        else{
+            redirect('Site/mondossier');
+        }        		
+	}
+    
+    public function livreModif($id){
+        if($this->estAdmin()){
+            $param['resultat']=$this->mindex->lirelivre(rawurldecode($id));
+            $this->load->view('vmodifierlivre',$param);	
+        }
+        else{
+            redirect('Site/mondossier');
+        }  
+	}
+    
+    public function enregisterlivremodif(){
+		$this->mindex->miseajourlivre($this->input->post('id'),$this->input->post('titre'),$this->input->post('auteur'),
+		$this->input->post('annee'), $this->input->post('genre')); 
+		
+		redirect('admin/pageadmin');
+	}
 }
 ?>

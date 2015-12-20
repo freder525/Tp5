@@ -83,16 +83,15 @@ class Site extends CI_Controller {
 	}
 	public function mondossier()
 	{
-		$resultat1=$this->mindex->livresempruntes($_SESSION['user']['id']);
-		$resultat2=$this->mindex->livresreserves($_SESSION['user']['id']);
-		$param=array(
-			'usertype'=>$_SESSION['user']['type'],
-			'empruntes'=>$resultat1,
-			'reserves'=>$resultat2,
-			);
-
 		if($this->mindex->estConnecte())
 		{
+            $resultat1=$this->mindex->livresempruntes($_SESSION['user']['id']);
+            $resultat2=$this->mindex->livresreserves($_SESSION['user']['id']);
+            $param=array(
+                'usertype'=>$_SESSION['user']['type'],
+                'empruntes'=>$resultat1,
+                'reserves'=>$resultat2,
+                );
 			if($_SERVER['REQUEST_METHOD'] == 'POST')
 			{
 				$leLivre = $this->mindex->lirelivre($this->input->post('isbn'));
@@ -311,24 +310,14 @@ class Site extends CI_Controller {
 			show_404();
 		}
 	}
-	public function livreSupp($id){
-	$this->mindex->supprimerlivre('livre',$id);
-	redirect('site/pageadmin');		
-	}
+	
 	public function suppCommentaire($id){
 	$this->mindex->supprimercommentaire($id);
 	redirect('site/amiconnecte');		
 	}
-	public function livreModif($id){
-	$param['resultat']=$this->mindex->lirelivre($id);
-	$this->load->view('vmodifierlivre',$param);		
-	}
-	public function enregisterlivremodif(){
-		$this->mindex->miseajourlivre($this->input->post('id'),$this->input->post('titre'),$this->input->post('auteur'),
-		$this->input->post('annee'), $this->input->post('genre')); 
-		
-		redirect('site/pageadmin');
-	}
+	
+	
+    
 	public function deconnexion(){
 		session_start();
 		$_SESSION=array();
